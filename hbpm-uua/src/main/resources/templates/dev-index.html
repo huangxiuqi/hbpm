@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${pageTitle}">统一身份认证</title>
+    <script type="module" crossorigin src="/login/static/index-480ca2c3.js"></script>
+    <link rel="stylesheet" href="/login/static/index-a25175bc.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script th:utext="${pageVars}">
+      window.__LOGIN_PAGE_VARS = {
+        clientInfo: {
+          name: '管理后台',
+          desc: '管理后台',
+          icon: 'https://g.alicdn.com/dingding/web/0.2.3/img/logo.png',
+        }
+      };
+    </script>
+    <script type="module">
+      import RefreshRuntime from "http://localhost:3000/login/@react-refresh";
+      RefreshRuntime.injectIntoGlobalHook(window);
+      window.$RefreshReg$ = () => {};
+      window.$RefreshSig$ = () => (type) => type;
+      window.__vite_plugin_react_preamble_installed__ = true;
+    </script>
+    <script type="module" src="http://localhost:3000/login/@vite/client"></script>
+    <script type="module" src="http://localhost:3000/login/src/main.tsx"></script>
+  </body>
+</html>

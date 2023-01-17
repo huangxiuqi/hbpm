@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbpm.mapper.contact.ContactRoleGroupBaseMapper">
+  <resultMap id="BaseResultMap" type="com.hbpm.model.contact.ContactRoleGroupEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tenant_id" jdbcType="BIGINT" property="tenantId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from contact_role_group
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hbpm.model.contact.ContactRoleGroupEntity">
+    insert into contact_role_group (id, tenant_id, `name`, 
+      `type`)
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hbpm.model.contact.ContactRoleGroupEntity">
+    update contact_role_group
+    set tenant_id = #{tenantId,jdbcType=BIGINT},
+      `name` = #{name,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, tenant_id, `name`, `type`
+    from contact_role_group
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, tenant_id, `name`, `type`
+    from contact_role_group
+  </select>
+  <delete id="batchDeleteByPrimaryKey">
+    delete from contact_role_group where id in 
+    <foreach close=")" collection="ids" index="index" item="id" open="(" separator=",">
+      #{id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <insert id="batchInsert" parameterType="com.hbpm.model.contact.ContactRoleGroupEntity">
+    insert into contact_role_group (id, tenant_id, `name`, `type`
+      )
+    <foreach close=")" collection="entityList" index="index" item="entity" open="(" separator=",">
+      #{id,jdbcType=BIGINT}, #{tenantId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}
+        )
+    </foreach>
+  </insert>
+</mapper>

@@ -1,0 +1,9 @@
+feign:
+  sentinel:
+    enabled: true
+spring:
+  cloud:
+    sentinel:
+      eager: true
+      log:
+        dir: ./logs/csp

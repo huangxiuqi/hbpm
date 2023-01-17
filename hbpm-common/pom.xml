@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.hbpm</groupId>
+        <artifactId>hbpm-parent</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>hbpm-common</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>hbpm-base</module>
+        <module>hbpm-third</module>
+        <module>hbpm-mbg</module>
+        <module>hbpm-rpc</module>
+        <module>hbpm-model</module>
+    </modules>
+</project>

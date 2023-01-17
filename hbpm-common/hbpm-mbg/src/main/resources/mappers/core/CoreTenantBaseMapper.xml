@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbpm.mapper.core.CoreTenantBaseMapper">
+  <resultMap id="BaseResultMap" type="com.hbpm.model.core.CoreTenantEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from core_tenant
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hbpm.model.core.CoreTenantEntity">
+    insert into core_tenant (id, `name`)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hbpm.model.core.CoreTenantEntity">
+    update core_tenant
+    set `name` = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, `name`
+    from core_tenant
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, `name`
+    from core_tenant
+  </select>
+  <delete id="batchDeleteByPrimaryKey">
+    delete from core_tenant where id in 
+    <foreach close=")" collection="ids" index="index" item="id" open="(" separator=",">
+      #{id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <insert id="batchInsert" parameterType="com.hbpm.model.core.CoreTenantEntity">
+    insert into core_tenant (id, `name`)
+    <foreach close=")" collection="entityList" index="index" item="entity" open="(" separator=",">
+      #{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+</mapper>

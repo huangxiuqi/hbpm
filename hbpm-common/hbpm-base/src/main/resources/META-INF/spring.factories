@@ -1,0 +1,5 @@
+org.springframework.boot.SpringApplicationRunListener=\
+    com.hbpm.base.config.TimeZoneConfiguration
+
+org.springframework.boot.env.EnvironmentPostProcessor=\
+    com.hbpm.base.config.CommonConfigEnvironmentPostProcessor

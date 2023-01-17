@@ -1,0 +1,34 @@
+server:
+  port: 20004
+spring:
+  application:
+    name: admin-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/hbpm?serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf-8&useSSL=true&rewriteBatchedStatements=true
+    username: root
+    password: root
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192.168.1.*
+    nacos:
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        client-ip: 192.168.1.111
+        dashboard: 127.0.0.1:8080
+  flyway:
+    table: flyway_schema_history_admin
+    baseline-on-migrate: true
+  thymeleaf:
+    cache: false
+mybatis:
+  mapper-locations: classpath:mapper/*
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbpm.mapper.gateway.GatewayRouteDefineBaseMapper">
+  <resultMap id="BaseResultMap" type="com.hbpm.model.gateway.GatewayRouteDefineEntity">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="is_enable" jdbcType="TINYINT" property="enable" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="predicates" jdbcType="LONGVARCHAR" property="predicates" />
+    <result column="filters" jdbcType="LONGVARCHAR" property="filters" />
+    <result column="metadata" jdbcType="LONGVARCHAR" property="metadata" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from gateway_route_define
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hbpm.model.gateway.GatewayRouteDefineEntity">
+    insert into gateway_route_define (id, uri, `order`, 
+      is_enable, create_time, remark, 
+      predicates, filters, metadata
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER}, 
+      #{enable,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{predicates,jdbcType=LONGVARCHAR}, #{filters,jdbcType=LONGVARCHAR}, #{metadata,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hbpm.model.gateway.GatewayRouteDefineEntity">
+    update gateway_route_define
+    set uri = #{uri,jdbcType=VARCHAR},
+      `order` = #{order,jdbcType=INTEGER},
+      is_enable = #{enable,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      predicates = #{predicates,jdbcType=LONGVARCHAR},
+      filters = #{filters,jdbcType=LONGVARCHAR},
+      metadata = #{metadata,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, uri, `order`, is_enable, create_time, remark, predicates, filters, metadata
+    from gateway_route_define
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, uri, `order`, is_enable, create_time, remark, predicates, filters, metadata
+    from gateway_route_define
+  </select>
+  <delete id="batchDeleteByPrimaryKey">
+    delete from gateway_route_define where id in 
+    <foreach close=")" collection="ids" index="index" item="id" open="(" separator=",">
+      #{id,jdbcType=VARCHAR}
+    </foreach>
+  </delete>
+  <insert id="batchInsert" parameterType="com.hbpm.model.gateway.GatewayRouteDefineEntity">
+    insert into gateway_route_define (id, uri, `order`, is_enable, 
+      create_time, remark, predicates, 
+      filters, metadata)
+    <foreach close=")" collection="entityList" index="index" item="entity" open="(" separator=",">
+      #{id,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER}, #{enable,jdbcType=TINYINT}, 
+        #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{predicates,jdbcType=LONGVARCHAR}, 
+        #{filters,jdbcType=LONGVARCHAR}, #{metadata,jdbcType=LONGVARCHAR})
+    </foreach>
+  </insert>
+</mapper>

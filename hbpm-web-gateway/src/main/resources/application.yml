@@ -1,0 +1,65 @@
+server:
+  port: 80
+  reactive:
+    session:
+      timeout: 2h
+      cookie:
+        name: gateway_session
+        http-only: true
+        secure: false
+        domain: hbpm.com
+spring:
+  application:
+    name: gateway-service
+  r2dbc:
+    url: r2dbc:mariadb://localhost:3306/hbpm?serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf-8&useSSL=true&rewriteBatchedStatements=true
+    username: root
+    password: root
+  redis:
+    host: localhost
+    password: rd2019@redis
+    database: 0
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192.168.1.*
+    nacos:
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        client-ip: 192.168.1.111
+        dashboard: 127.0.0.1:8080
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          keycloak:
+#            provider: keycloak
+#            client-id: hbpm
+#            client-secret: SL6xlOaQxl7NXppI5JP3VKggW1qjd7dX
+#            authorization-grant-type: authorization_code
+#            redirect-uri: "http://127.0.0.1:20000/login/oauth2/code/{registrationId}"
+#            scope: openid
+#            client-name: keycloak
+#        provider:
+#          keycloak:
+#            issuer-uri: http://127.0.0.1:8080/realms/myrealm
+  flyway:
+    table: flyway_schema_history_gateway
+    baseline-on-migrate: true
+logging:
+  level:
+    org:
+      springframework:
+        security: info
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

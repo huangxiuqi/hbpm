@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${pageTitle}">统一身份认证</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script th:utext="${pageVars}">
+      window.__LOGIN_PAGE_VARS = {
+        clientInfo: {
+          name: '管理后台',
+          desc: '管理后台',
+          icon: 'https://g.alicdn.com/dingding/web/0.2.3/img/logo.png',
+        }
+      };
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

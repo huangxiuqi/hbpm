@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbpm.mapper.contact.ContactResourceBaseMapper">
+  <resultMap id="BaseResultMap" type="com.hbpm.model.contact.ContactResourceEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="order_number" jdbcType="INTEGER" property="orderNumber" />
+    <result column="is_show" jdbcType="TINYINT" property="show" />
+    <result column="is_new_window" jdbcType="TINYINT" property="newWindow" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from contact_resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hbpm.model.contact.ContactResourceEntity">
+    insert into contact_resource (id, parent_id, `name`, 
+      `type`, url, icon, order_number, 
+      is_show, is_new_window)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{orderNumber,jdbcType=INTEGER}, 
+      #{show,jdbcType=TINYINT}, #{newWindow,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hbpm.model.contact.ContactResourceEntity">
+    update contact_resource
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      `name` = #{name,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=TINYINT},
+      url = #{url,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      is_show = #{show,jdbcType=TINYINT},
+      is_new_window = #{newWindow,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, parent_id, `name`, `type`, url, icon, order_number, is_show, is_new_window
+    from contact_resource
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, parent_id, `name`, `type`, url, icon, order_number, is_show, is_new_window
+    from contact_resource
+  </select>
+  <delete id="batchDeleteByPrimaryKey">
+    delete from contact_resource where id in 
+    <foreach close=")" collection="ids" index="index" item="id" open="(" separator=",">
+      #{id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <insert id="batchInsert" parameterType="com.hbpm.model.contact.ContactResourceEntity">
+    insert into contact_resource (id, parent_id, `name`, `type`, 
+      url, icon, order_number, 
+      is_show, is_new_window)
+    <foreach close=")" collection="entityList" index="index" item="entity" open="(" separator=",">
+      #{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+        #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{orderNumber,jdbcType=INTEGER}, 
+        #{show,jdbcType=TINYINT}, #{newWindow,jdbcType=TINYINT})
+    </foreach>
+  </insert>
+</mapper>

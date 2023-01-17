@@ -1,0 +1,4 @@
+com.hbpm.base.web.error.WebErrorConfiguration
+com.hbpm.base.idworker.IdWorkerConfiguration
+com.hbpm.base.web.response.ServletResponseConfiguration
+com.hbpm.base.web.converter.LongToStringConverter

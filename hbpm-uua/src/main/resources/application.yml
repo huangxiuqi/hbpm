@@ -1,0 +1,36 @@
+server:
+  port: 20002
+  servlet:
+    session:
+      timeout: 12h
+      cookie:
+        http-only: true
+        secure: false
+        name: uua_session
+        domain: hbpm.com
+    encoding:
+      charset: utf-8
+      force-response: true
+spring:
+  application:
+    name: uua-service
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192.168.1.*
+    nacos:
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        client-ip: 192.168.1.111
+        dashboard: 127.0.0.1:8080
+  thymeleaf:
+    cache: false
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

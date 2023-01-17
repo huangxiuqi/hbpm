@@ -1,0 +1,41 @@
+server:
+  port: 20001
+spring:
+  application:
+    name: core-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/hbpm?serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf-8&useSSL=true&rewriteBatchedStatements=true
+    username: root
+    password: root
+  redis:
+    host: localhost
+    password: rd2019@redis
+    database: 0
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192.168.1.*
+    nacos:
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        client-ip: 192.168.1.111
+        dashboard: 127.0.0.1:8080
+  flyway:
+    table: flyway_schema_history_core
+    baseline-on-migrate: true
+mybatis:
+  mapper-locations: classpath*:mappers/**/*.xml
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

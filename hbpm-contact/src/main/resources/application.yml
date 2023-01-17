@@ -1,0 +1,35 @@
+server:
+  port: 20003
+spring:
+  application:
+    name: contact-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/hbpm?serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf-8&useSSL=true&rewriteBatchedStatements=true
+    username: root
+    password: root
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192.168.1.*
+    nacos:
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        client-ip: 192.168.1.111
+        dashboard: 127.0.0.1:8080
+  flyway:
+    table: flyway_schema_history_contacts
+    baseline-on-migrate: true
+id-worker:
+  data-center-id: 0
+  worker-id: 0
+mybatis:
+  mapper-locations: classpath*:mappers/**/*.xml
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
